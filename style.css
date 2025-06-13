@@ -11,7 +11,7 @@
   --gris: #e2e8f0;
   --morado: #b794f4;
   --azul: #38b6ff;
-  --borde: #333;
+  --borde: #535353;
 }
 
 /* =========================
@@ -230,7 +230,7 @@ main {
   vertical-align: middle;
 }
 .tabla-generala td {
-  background: var(--verde-medio);
+  background: #0b2e1f;
   color: var(--blanco);
 }
 .tabla-generala .jugada {
@@ -328,10 +328,10 @@ main {
    BOTONES DE TABLERO/JUGADORES
 ========================= */
 [data-j] {
-  font-size: 2rem;
-  font-weight: bold;
-  padding: 1rem 1.5rem;
-  border-radius: 1.2rem;
+  font-size: 1rem;
+    padding: 0.5rem 0.8rem;      /* Padding interno más cómodo */
+    margin: 0.1rem;
+    border-radius: 0.2rem;
   background: var(--amarillo, #ffd600);
   color: var(--verde-oscuro, #183a2c);
   border: 2px solid var(--verde-acento, #38a169);
@@ -343,6 +343,9 @@ main {
 [data-j].total:hover {
   color: var(--verde-oscuro, #183a2c) !important;
   font-weight: bold;
+  font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.2rem;
 }
 
 /* =========================
@@ -654,11 +657,9 @@ footer {
     vertical-align: middle !important;
     overflow: visible !important;
   }
+  
 
-   #tablero-section, #tablero {
-    padding-bottom: 4rem; /* Ajusta según la altura de tu footer */
-  }
-   
+  
 }
 
 /* =========================
@@ -850,4 +851,19 @@ footer {
   background: linear-gradient(90deg, #ffd600 60%, #38a169 100%);
   color: #222;
   transform: scale(1.05);
+}
+
+
+
+
+/* Separar visualmente las columnas de nombres en la tabla */
+.tabla-generala th.nombre {
+  border-right: 3px solid #1976d2; /* Línea azul entre columnas de nombres */
+  background: #e3f2fd;             /* Fondo suave para distinguir */
+  position: relative;
+  z-index: 1;
+}
+
+.tabla-generala th.nombre:last-child {
+  border-right: none; /* Quitar borde en la última columna */
 }
