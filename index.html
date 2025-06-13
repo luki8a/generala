@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generala</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="modal-jugadores" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal-jugadores">&times;</span>
+            <h2>Anotador <span>GENERALA</span></h2>
+            <p>Seleccione cantidad de jugadores:</p>
+            <div id="cantidad-jugadores">
+                <!-- Botones de 2 a 7 jugadores -->
+                <button class="btn-cant" data-cant="2">2</button>
+                <button class="btn-cant" data-cant="3">3</button>
+                <button class="btn-cant" data-cant="4">4</button>
+                <button class="btn-cant" data-cant="5">5</button>
+                <button class="btn-cant" data-cant="6">6</button>
+                <button class="btn-cant" data-cant="7">7</button>
+            </div>
+            <form id="form-jugadores">
+                <p>Ingrese nombre o inicial de los jugadores:</p>
+                <div id="inputs-jugadores"></div>
+                <button type="submit" id="comenzar-partida">COMENZAR</button>
+            </form>
+        </div>
+    </div>
+
+    <header>
+  <div class="dropdown">
+    <button class="dropdown-btn" id="dropdown-btn">MENÚ &#9662;</button>
+    <div class="dropdown-content" id="dropdown-content">
+      <button id="btn-nueva-partida">NUEVA PARTIDA</button>
+      <button id="btn-reglas">REGLAS</button>
+      <button id="btn-reiniciar">REINICIAR</button>
+    </div>
+  </div>
+</header>
+
+        <main>
+            <section id="tablero-section">
+                <div id="tablero">
+                    <!-- Aquí se genera el tablero dinámicamente -->
+                </div>
+            </section>
+            <!-- Se eliminó la sección de dados -->
+        </main>
+  
+
+    <div id="modal-puntaje" class="modal">
+        <div class="modal-content" id="puntaje-content">
+            <!-- Aquí se muestra el selector de puntaje -->
+        </div>
+    </div>
+
+    <div id="modal-reglas" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-modal-reglas">&times;</span>
+        <h2>Reglas de Generala</h2>
+        <ol style="text-align:left;">
+            <li><strong>Número de jugadores:</strong> De 2 a 7 jugadores.</li>
+            <li><strong>Equipamiento:</strong> Cinco dados y una planilla de puntuación.</li>
+            <li><strong>Comienzo:</strong> Cada jugador tira los cinco dados, quien obtenga mayor puntuación comienza.</li>
+            <li><strong>Turno:</strong> Cada jugador tira los cinco dados, puede volver a tirar hasta dos veces los dados que elija.</li>
+            <li><strong>Categorías y puntajes:</strong>
+                <ul>
+                    <li><strong>Unos, Dos, Tres, Cuatros, Cincos, Seis:</strong> Suma de los dados iguales al número.</li>
+                    <li><strong>Escalera:</strong> 25 puntos (1-2-3-4-5 o 2-3-4-5-6).</li>
+                    <li><strong>Full:</strong> 30 puntos (tres dados iguales y dos dados iguales).</li>
+                    <li><strong>Póker:</strong> 40 puntos (cuatro dados iguales).</li>
+                    <li><strong>Generala:</strong> 50 puntos (cinco dados iguales).</li>
+                    <li><strong>Generala Doble:</strong> 100 puntos (segunda generala en la misma partida).</li>
+                </ul>
+            </li>
+            <li><strong>Anotación:</strong> Tras cada turno, el jugador anota su puntuación en la categoría elegida.</li>
+            <li><strong>Final:</strong> El juego dura diez vueltas por jugador.</li>
+            <li><strong>Ganador:</strong> El jugador con mayor puntuación al final gana.</li>
+        </ol>
+        <p style="text-align:left;"><strong>Estrategias:</strong> Prioriza la generala, aprovecha los dados reutilizables y decide cuándo arriesgar o asegurar puntos.</p>
+    </div>
+</div>
+
+    <footer>
+               <p>&copy; Diseñado por el<span style="color:#e53935; font-weight:bold;"> Ocho</span> 2025 Generala.</p>
+    </footer>
+    <script src="script.js"></script>
+
+    <div id="custom-alert" class="custom-alert">
+      <div class="custom-alert-content">
+        <span id="custom-alert-msg"></span>
+        <div id="custom-alert-buttons">
+          <button id="custom-alert-accept" style="display:none;">Aceptar</button>
+          <button id="custom-alert-cancel" style="display:none;">Cancelar</button>
+          <button id="custom-alert-close">Cerrar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div id="ganador-modal" class="ganador-modal">
+  <div class="ganador-content">
+    <canvas id="fireworks-canvas"></canvas>
+    <h2 id="ganador-titulo"></h2>
+    <ul id="ranking-list"></ul>
+    <div class="ganador-botones">
+      <button id="btn-jugar-nuevo">Jugar de nuevo</button>
+      <button id="btn-menu-principal">Menú principal</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

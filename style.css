@@ -1,0 +1,818 @@
+/* =========================
+   PALETA DE COLORES
+========================= */
+:root {
+  --verde-oscuro: #183a2c;
+  --verde-medio: #22543d;
+  --verde-claro: #2f855a;
+  --verde-acento: #38a169;
+  --amarillo: #ffd600;
+  --blanco: #fff;
+  --gris: #e2e8f0;
+  --morado: #b794f4;
+  --azul: #38b6ff;
+  --borde: #333;
+}
+
+/* =========================
+   RESET Y ESTRUCTURA GLOBAL
+========================= */
+html, body {
+  height: 100%;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--verde-oscuro);
+  color: var(--blanco);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   HEADER Y DROPDOWN MENU
+========================= */
+header {
+  width: 100vw;
+  background: var(--verde-medio);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background: var(--verde-medio);
+}
+
+/* Dropdown button (visible en mobile/tablet) */
+.dropdown-btn {
+  width: 100vw;
+  background: var(--verde-medio);
+  color: var(--blanco);
+  border: none;
+  font-size: 1.2rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+}
+
+/* Dropdown content (menú desplegable) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100vw;
+  background: var(--verde-medio);
+  box-shadow: 0 4px 16px #0004;
+  z-index: 100;
+  flex-direction: column;
+  align-items: stretch;
+}
+.dropdown-content button {
+  border: none;
+  background: linear-gradient(90deg, var(--verde-acento) 0%, var(--verde-claro) 100%);
+  color: var(--blanco);
+  font-size: 1.1rem;
+  padding: 0.9rem 1.2rem;
+  margin: 0.3rem 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 8px #0002;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 
+    background 0.2s, 
+    color 0.2s, 
+    transform 0.1s, 
+    box-shadow 0.2s;
+  text-align: center;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.dropdown-content button:hover {
+  background: linear-gradient(90deg, var(--amarillo) 60%, var(--verde-acento) 100%);
+  color: var(--verde-oscuro);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px #ffd60055;
+}
+.dropdown-content button:last-child {
+  border-bottom: none;
+}
+.dropdown-content button:hover {
+  background: var(--verde-acento);
+  color: var(--verde-oscuro);
+}
+
+/* Mostrar el dropdown cuando está activo */
+.dropdown.open .dropdown-content {
+  display: flex;
+}
+
+/* =========================
+   NAV DESKTOP (horizontal)
+========================= */
+@media (min-width: 700px) {
+  .dropdown {
+    justify-content: center;
+    background: var(--verde-medio);
+  }
+  .dropdown-btn {
+    display: none;
+  }
+  .dropdown-content {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    width: auto;
+    box-shadow: none;
+    background: none;
+  }
+  .dropdown-content button {
+    border: 2px solid var(--verde-acento);
+    background: none;
+    color: var(--blanco);
+    border-radius: 2rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    margin: 0.2rem 0.5rem;
+    border-bottom: none;
+    width: auto;
+    text-align: center;
+  }
+}
+
+/* =========================
+   MAIN Y TABLERO
+========================= */
+main {
+  flex: 1 1 auto;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#tablero-section {
+  flex: 1 1 auto;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#tablero {
+  width: 100vw;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0 2.2rem 0; /* Espacio para el footer fijo */
+  padding-bottom: 3.2rem;
+  overflow: auto;
+}
+
+/* =========================
+   TABLA DE JUEGO
+========================= */
+.tabla-generala {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-collapse: collapse;
+  font-size: 1rem;
+  background: var(--verde-medio);
+  table-layout: fixed;
+}
+.tabla-generala th, .tabla-generala td {
+  border: 1px solid var(--borde);
+  text-align: center;
+  padding: 0.15rem 0.05rem;
+  line-height: 1.1;
+  min-width: 48px;
+  min-height: 2rem;
+  height: 1.7rem;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tabla-generala th {
+  background: var(--verde-claro);
+  color: var(--blanco);
+  font-weight: bold;
+  letter-spacing: 1px;
+  vertical-align: middle;
+}
+.tabla-generala td {
+  background: var(--verde-medio);
+  color: var(--blanco);
+}
+.tabla-generala .jugada {
+  color: var(--amarillo);
+  font-weight: bold;
+  background: transparent;
+  text-align: left;
+  padding-left: 8px;
+}
+.tabla-generala .jugada.especial {
+  text-transform: uppercase;
+}
+.tabla-generala .jugada.total-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: #222;
+  background: #ffd600;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 0 #fff8, 0 0 2px #ffd60088;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip; /* Corta el texto sin puntos suspensivos */
+}
+
+.tabla-generala .total {
+  font-weight: bold;
+  background: var(--verde-acento);
+  color: var(--verde-oscuro);
+}
+.tabla-generala th .nombre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centra horizontalmente */
+  justify-content: center;
+  gap: 0.2em;
+  width: 100%;
+  text-align: center;
+}
+
+.tabla-generala th {
+  vertical-align: middle;
+  text-align: center;
+}
+.tabla-generala .nombre:nth-child(2) { color: var(--morado);}
+.tabla-generala .nombre:nth-child(3) { color: var(--azul);}
+.tabla-generala .nombre:nth-child(4) { color: var(--amarillo);}
+.tabla-generala .nombre:nth-child(5) { color: var(--verde-acento);}
+.tabla-generala .nombre:nth-child(6) { color: #ff6f61;}
+.tabla-generala .nombre:nth-child(7) { color: #ffb347;}
+.tabla-generala .nombre:nth-child(8) { color: #00b894;}
+
+/* =========================
+   POSICIÓN DEL TURNO
+========================= */
+.posicion {
+  display: inline-block;
+  color: #ffd600;
+  background: #222;
+  border-radius: 1em;
+  padding: 0 0.15em;
+  min-width: 2.1em;   /* Igual ancho para todos los puestos */
+  max-width: 2.1em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.2;
+  display: flex;
+  justify-content: center;
+}
+
+.posicion.primero {
+  display: inline-block;
+  color: #fff;
+  background: linear-gradient(90deg, #ffd600 60%, #fffbe6 100%);
+  box-shadow: 0 0 8px 2px #ffd60099;
+  border-radius: 1em;
+  padding: 0 0.7em;   /* Padding mínimo */
+  min-width: unset;
+  width: auto;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.2;
+}
+/* =========================
+   BOTONES DE TABLERO/JUGADORES
+========================= */
+[data-j] {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem 1.5rem;
+  border-radius: 1.2rem;
+  background: var(--amarillo, #ffd600);
+  color: var(--verde-oscuro, #183a2c);
+  border: 2px solid var(--verde-acento, #38a169);
+  margin: 0.3rem;
+  box-shadow: 0 2px 8px #ffd60044;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+[data-j].total,
+[data-j].total:hover {
+  color: var(--verde-oscuro, #183a2c) !important;
+  font-weight: bold;
+}
+
+/* =========================
+   FOOTER FIJO
+========================= */
+footer {
+     height: 2.2rem;
+  min-height: 2.2rem;
+  line-height: 2.2rem;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: var(--verde-medio);
+  color: var(--gris, #e2e8f0);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.4rem 0;
+  z-index: 20;
+  box-shadow: 0 -2px 8px #0002;
+}
+
+/* =========================
+   MODALES
+========================= */
+/* MODAL: fondo centrado y scroll si el contenido es largo */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+/* MODAL CONTENT: ajusta tamaño y permite scroll interno */
+.modal-content {
+  background: var(--verde-medio);
+  color: var(--blanco);
+  border-radius: 1rem;
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
+  min-width: 280px;
+  max-width: 95vw;
+  max-height: 90vh;         /* Limita el alto al 90% de la pantalla */
+  overflow-y: auto;         /* Scroll interno si el contenido es largo */
+  box-shadow: 0 4px 24px #000a;
+  position: relative;
+  text-align: left;
+}
+
+/* BOTÓN CLOSE: siempre visible arriba a la derecha */
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: var(--amarillo);
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 10;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0;
+}
+
+/* MOBILE: ajusta padding y tamaño del modal */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1.2rem 0.5rem 0.8rem 0.5rem;
+    min-width: 0;
+    max-width: 98vw;
+    max-height: 92vh;
+    font-size: 0.98rem;
+  }
+  .close {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 2.2rem;
+  }
+}
+
+/* =========================
+   BOTONES DE CANTIDAD DE JUGADORES
+========================= */
+#cantidad-jugadores {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.btn-cant {
+  background: none;
+  border: 2px solid var(--verde-acento);
+  color: var(--amarillo);
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-cant.selected, .btn-cant:hover {
+  background: var(--verde-acento);
+  color: var(--verde-oscuro);
+}
+
+/* =========================
+   INPUTS DE JUGADORES Y BOTÓN COMENZAR
+========================= */
+#inputs-jugadores {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente si el contenedor tiene altura */
+  gap: 0.3rem;
+  width: 100%;
+  height: 100%;          /* Opcional: ocupa todo el alto del contenedor padre */
+}
+
+#inputs-jugadores input {
+  width: 8rem;
+  margin: 0.3rem 0;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--verde-acento);
+  font-size: 1rem;
+  background: var(--verde-oscuro);
+  color: var(--blanco);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* Opcional: centra los inputs horizontalmente */
+  gap: 0.3rem;
+}
+#comenzar-partida {
+  display: block;
+  margin: 1rem auto 0 auto;
+  margin-top: 1rem;
+  background: var(--amarillo);
+  color: var(--verde-oscuro);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#comenzar-partida:hover {
+  background: var(--verde-acento);
+  color: var(--blanco);
+}
+
+/* =========================
+   OPCIONES DE PUNTAJE
+========================= */
+.opciones-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+.puntaje-opcion {
+  width: 90px;
+  padding: 0.6rem 0;
+  font-size: 1.1rem;
+  border-radius: 1.5rem;
+  border: none;
+  background: var(--verde-acento, #38a169);
+  color: var(--verde-oscuro, #183a2c);
+  font-weight: bold;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.puntaje-opcion:hover {
+  background: var(--amarillo, #ffd600);
+  color: var(--verde-oscuro, #183a2c);
+}
+.puntaje-opcion.servido-btn {
+  background: #ffe066 !important;
+  color: #183a2c !important;
+  box-shadow: 0 0 8px 2px #ffd60099;
+  border: 2px solid #ffd600;
+}
+
+/* =========================
+   DADOS Y BOTÓN DE TIRAR
+========================= */
+#dados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+#roll-dice {
+  background: var(--verde-acento);
+  color: var(--verde-oscuro);
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#roll-dice:hover {
+  background: var(--amarillo);
+  color: var(--verde-oscuro);
+}
+#dice-results {
+  display: flex;
+  gap: 0.5rem;
+}
+.dado {
+  width: 44px;
+  height: 44px;
+  background: var(--verde-claro);
+  color: var(--amarillo);
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--verde-acento);
+  box-shadow: 0 2px 4px #0002;
+}
+
+/* =========================
+   MOBILE AJUSTES
+========================= */
+@media (max-width: 700px) {
+  .tabla-generala th, .tabla-generala td {
+    font-size: 0.95rem;
+    padding: 0.15rem 0.05rem;
+  }
+  [data-j] {
+    font-size: 1rem;
+    padding: 0.3rem 0.4rem;
+  }
+  .tabla-generala {
+    font-size: 0.95rem;
+  }
+  .dropdown-content {
+    font-size: 1rem;
+  }
+
+  .tabla-generala th .nombre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+  }
+  .tabla-generala th .posicion {
+    margin-left: 0;
+    margin-top: 0.1rem;
+    display: block;
+  }
+
+  /* Achica la altura de las filas */
+  .tabla-generala th, .tabla-generala td {
+    padding: 0.08rem 0.03rem;
+    min-height: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.92rem;
+  }
+
+  .tabla-generala .jugada.total-label {
+    font-size: 0.9rem;
+  }
+  
+
+  
+}
+
+/* =========================
+   OCULTA SCROLLBARS
+========================= */
+#tablero::-webkit-scrollbar { display: none; }
+#tablero { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+.custom-alert {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.custom-alert.active {
+  display: flex;
+}
+.custom-alert-content {
+  background: var(--verde-medio, #22543d);
+  color: var(--blanco, #fff);
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px #000a;
+  min-width: 220px;
+  max-width: 90vw;
+  text-align: center;
+  position: relative;
+  font-size: 1.1rem;
+}
+#custom-alert-close {
+  margin-top: 1.2rem;
+  background: var(--amarillo, #ffd600);
+  color: var(--verde-oscuro, #183a2c);
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#custom-alert-close:hover {
+  background: var(--verde-acento, #38a169);
+  color: var(--blanco, #fff);
+}
+
+
+
+#custom-alert-buttons {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+#custom-alert-accept {
+  background: #ffd600;
+  color: #183a2c;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.6rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #38a16933;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+#custom-alert-accept:hover {
+  background: linear-gradient(90deg, #ffd600 60%);
+  color: #222;
+  transform: scale(1.05);
+}
+
+#custom-alert-cancel {
+  background: #e53935 60%;
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.6rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #e5393533;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+#custom-alert-cancel:hover {
+  background: #e53935 100%;
+  color: #222;
+  transform: scale(1.05);
+}
+
+
+@media (min-width: 900px) {
+  #tablero {
+    max-width: 700px;    /* O el valor que prefieras */
+    margin: 0 auto;      /* Centra el tablero */
+    border-radius: 1rem; /* Opcional: bordes redondeados */
+    box-shadow: 0 4px 24px #0003; /* Opcional: sombra suave */
+  }
+}
+
+.ganador-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+.ganador-modal.active {
+  display: flex;
+}
+.ganador-content {
+  position: relative;
+  background: #183a2c;
+  color: #ffd600;
+  border-radius: 1.5rem;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  min-width: 320px;
+  max-width: 95vw;
+  text-align: center;
+  box-shadow: 0 4px 32px #000a;
+  overflow: hidden;
+}
+#fireworks-canvas {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.ganador-content h2 {
+  position: relative;
+  z-index: 2;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #ffd600;
+  text-shadow: 0 2px 12px #fff, 0 0 8px #ffd600;
+}
+#ranking-list {
+  position: relative;
+  z-index: 2;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 1.5rem 0;
+}
+#ranking-list li {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0.3rem 0;
+  background: #22543d;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 8px #0002;
+  text-align: left;
+}
+#ranking-list li:first-child {
+  background: #ffd600;
+  color: #183a2c;
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.ganador-botones {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.ganador-botones button {
+  background: linear-gradient(90deg, #38a169 60%, #ffd600 100%);
+  color: #183a2c;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #38a16933;
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+.ganador-botones button:hover {
+  background: linear-gradient(90deg, #ffd600 60%, #38a169 100%);
+  color: #222;
+  transform: scale(1.05);
+}
