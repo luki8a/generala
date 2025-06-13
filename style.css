@@ -654,6 +654,10 @@ footer {
     vertical-align: middle !important;
     overflow: visible !important;
   }
+
+   #tablero-section, #tablero {
+    padding-bottom: 4rem; /* Ajusta según la altura de tu footer */
+  }
   
 
   
