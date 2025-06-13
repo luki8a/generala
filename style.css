@@ -645,6 +645,16 @@ footer {
     font-size: 0.9rem;
   }
   
+  .tabla-generala .jugada.total-label {
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    line-height: 2.5rem !important;
+    font-size: 1rem;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    overflow: visible !important;
+  }
+  
 
   
 }
