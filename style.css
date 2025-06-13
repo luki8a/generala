@@ -658,7 +658,18 @@ footer {
    #tablero-section, #tablero {
     padding-bottom: 4rem; /* Ajusta según la altura de tu footer */
   }
-  
+
+   .tabla-generala .jugada.total-label,
+  .tabla-generala .jugada.total-resultado {
+    height: 2.5rem !important;
+    min-height: 2.5rem !important;
+    line-height: 2.5rem !important;
+    font-size: 1rem;
+    padding: 0 !important;
+    vertical-align: middle !important;
+    text-align: center;
+    box-sizing: border-box;
+  }
 
   
 }
