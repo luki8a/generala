@@ -173,7 +173,7 @@ main {
 #tablero-section {
   flex: 1 1 auto;
   width: 100vw;
-  height: 100%;
+  height: 100vw;
   display: flex;
   justify-content: center;
   align-items: stretch;
