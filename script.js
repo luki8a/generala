@@ -264,131 +264,51 @@ function mostrarAlerta(msg, opciones = {}) {
 }
 
 
-// Animación simple de fuegos artificiales
-function lanzarFuegosArtificiales() {
-  const canvas = document.getElementById('fireworks-canvas');
-  const ctx = canvas.getContext('2d');
-  // Ajusta el tamaño del canvas al tamaño del contenedor
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  let W = canvas.width;
-  let H = canvas.height;
-  let fireworks = [];
 
-  function randomColor() {
-    const colors = ['#ffd600', '#38a169', '#38b6ff', '#b794f4', '#ff6f61', '#ffb347', '#00b894'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
+// ===============================
+// Animación de cohetes para el ganador
+// ===============================
+function animarGanador(idGanador) {
+  const th = document.getElementById(idGanador);
+  if (!th) return;
 
-  function Firework() {
-    this.x = Math.random() * W;
-    this.y = H;
-    this.radius = 2 + Math.random() * 2;
-    this.color = randomColor();
-    this.vx = (Math.random() - 0.5) * 2;
-    this.vy = - (3 + Math.random() * 2);
-    this.alpha = 1;
-    this.exploded = false;
-    this.particles = [];
+  // Agrega la clase de brillo
+  th.classList.add('ganador-brilla');
+  th.style.position = 'relative';
+
+  // Crea y lanza 3 cohetes
+  for (let i = 0; i < 3; i++) {
+    const cohete = document.createElement('span');
+    cohete.className = 'cohete';
+    cohete.style.left = `${30 + i * 20}%`; // Espaciado horizontal
+    cohete.textContent = '🚀';
+    th.appendChild(cohete);
+
+    // Elimina el cohete después de la animación
+    setTimeout(() => {
+      cohete.remove();
+    }, 1200);
   }
-  Firework.prototype.update = function() {
-    if (!this.exploded) {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vy += 0.05;
-      if (this.vy > -1) {
-        this.exploded = true;
-        for (let i = 0; i < 30; i++) {
-          this.particles.push({
-            x: this.x,
-            y: this.y,
-            vx: Math.cos((i/30)*2*Math.PI) * (2 + Math.random()*2),
-            vy: Math.sin((i/30)*2*Math.PI) * (2 + Math.random()*2),
-            alpha: 1,
-            color: this.color
-          });
-        }
+}
+
+// Ejemplo de uso: animarGanador('ganador');
+// Llama a esta función cuando determines el ganador
+
+// ===============================
+// Evento para tachar celdas (poner X)
+// ===============================
+document.addEventListener('DOMContentLoaded', function () {
+  // Selecciona todas las celdas jugables
+  document.querySelectorAll('.tabla-generala td.jugada').forEach(celda => {
+    celda.addEventListener('click', function () {
+      // Si ya está tachada, no hacer nada
+      if (this.classList.contains('tachado')) return;
+
+      // Si la celda está vacía o con "-", permite tachar
+      if (this.textContent.trim() === '' || this.textContent.trim() === '-') {
+        this.textContent = 'X';
+        this.classList.add('tachado');
       }
-    } else {
-      this.particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.03;
-        p.alpha -= 0.02;
-      });
-      this.particles = this.particles.filter(p => p.alpha > 0);
-    }
-  };
-  Firework.prototype.draw = function(ctx) {
-    if (!this.exploded) {
-      ctx.save();
-      ctx.globalAlpha = this.alpha;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.restore();
-    } else {
-      this.particles.forEach(p => {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2, 0, 2*Math.PI);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-        ctx.restore();
-      });
-    }
-  };
-
-  function animate() {
-    ctx.clearRect(0, 0, W, H);
-    if (fireworks.length < 5 && Math.random() < 0.08) {
-      fireworks.push(new Firework());
-    }
-    fireworks.forEach(fw => {
-      fw.update();
-      fw.draw(ctx);
     });
-    fireworks = fireworks.filter(fw => !fw.exploded || fw.particles.length > 0);
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
-
-// Mostrar modal de ganador y ranking
-function mostrarGanador(nombreGanador, rankingArray) {
-  const modal = document.getElementById('ganador-modal');
-  const titulo = document.getElementById('ganador-titulo');
-  const lista = document.getElementById('ranking-list');
-  titulo.innerHTML = `¡${nombreGanador} es el ganador! 🎉`;
-  lista.innerHTML = '';
-  rankingArray.forEach((jug, idx) => {
-    lista.innerHTML += `<li>${idx+1}º - ${jug.nombre} <span style="float:right;">${jug.puntos} pts</span></li>`;
   });
-  modal.classList.add('active');
-  setTimeout(lanzarFuegosArtificiales, 300);
-
-  // Botones
-  document.getElementById('btn-jugar-nuevo').onclick = () => {
-    modal.classList.remove('active');
-    // Llama aquí a tu función para reiniciar partida
-    mostrarModalJugadores();
-  };
-  document.getElementById('btn-menu-principal').onclick = () => {
-    modal.classList.remove('active');
-    // Aquí puedes redirigir o mostrar el menú principal
-    // window.location.href = 'index.html'; // Ejemplo
-  };
-}
-
-// Supón que tienes los arrays jugadores y puntajes
-let ranking = jugadores.map((nombre, idx) => ({
-  nombre,
-  puntos: puntajes[idx][puntajes[idx].length-1]
-}));
-// Ordena de mayor a menor puntaje
-ranking.sort((a, b) => b.puntos - a.puntos);
-
-// Llama a la animación:
-mostrarGanador(ranking[0].nombre, ranking);
+});
